@@ -44,7 +44,7 @@ async def nabors(msg: types.Message):
 
             else:
                 
-                await msg.answer('Выберите Действие с наборами!', reply_markup=casses())
+                await msg.answer('Выберите действие по кнопкам ниже', reply_markup=casses())
         
         except:
             pass
