@@ -199,7 +199,7 @@ async def profile(msg: types.Message):
 async def sendx_(css: types.CallbackQuery):
     try:
         row = InlineKeyboardMarkup()
-        rows = InlineKeyboardButton(text='📝 Откликнуться', url=f'https://t.me/{css.from_user.username}') 
+        rows = InlineKeyboardButton(text='Откликнуться', url=f'https://t.me/{css.from_user.username}') 
         if css.data == 'starts_':
             async with aiosqlite.connect('teg.db') as tc:
                 async with tc.execute('SELECT * FROM users WHERE user_id = ?',(css.from_user.id,)) as f:
@@ -211,7 +211,7 @@ async def sendx_(css: types.CallbackQuery):
             if s_ == '0' or None:
                 pass
             else:
-                s = await bot.send_message(chat_id=-1001892774322, text=f' * ▸ Платформа: {datas[1]} \n▸ Получите оплату: {datas[2]}₽ \n▸ Описание: {datas[4]} \n \n \n★ Писать:{css.from_user.username}* \n☆ Наши выплаты: @SHARDopl', parse_mode='Markdown', reply_markup=row)
+                s = await bot.send_message(chat_id=-1001892774322, text=f' * ▸ Платформа: {datas[1]} \n▸ Получите оплату: {datas[2]}₽ \n▸ Описание: {datas[4]} \n \n \n★ Писать:@{css.from_user.username}* \n☆ Наши выплаты: @SHARDopl', parse_mode='Markdown', reply_markup=row)
             
             #s_ = await bot.send_message(chat_id='@fludilkaotzivnichka', text=f' 📈 {datas[1]}\n 👩‍🔧 Нужно людей - {datas[4]} \n 💴 Оплата - {datas[2]} \n 🏷 Описание : {datas[3]} \n ✉️ Писать - @{css.from_user.username}')
             
