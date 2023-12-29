@@ -3,7 +3,7 @@ from aiogram import Dispatcher,Bot,executor,types
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
+from aiogram.utils.markdown import link
 from aiogram.dispatcher import FSMContext
 from keyboards import *
 import datetime
@@ -211,7 +211,7 @@ async def sendx_(css: types.CallbackQuery):
             if s_ == '0' or None:
                 pass
             else:
-                s = await bot.send_message(chat_id=-1001892774322, text=f' * ▸ Платформа: {datas[1]} \n▸ Получите оплату: {datas[2]}₽ \n▸ Описание: {datas[4]} \n \n \n★ Писать: @{css.from_user.username}* \n☆ Наши выплаты: @SHARDopl', parse_mode='Markdown', reply_markup=row)
+                s = await bot.send_message(chat_id=-1001892774322, text=f' * ▸ Платформа: {datas[1]} \n▸ Получите оплату: {datas[2]}₽ \n▸ Описание: {datas[4]} \n \n \n★ Писать:@{css.from_user.username}* \n☆ Наши выплаты: @SHARDopl', parse_mode='Markdown', reply_markup=row)
             
             #s_ = await bot.send_message(chat_id='@fludilkaotzivnichka', text=f' 📈 {datas[1]}\n 👩‍🔧 Нужно людей - {datas[4]} \n 💴 Оплата - {datas[2]} \n 🏷 Описание : {datas[3]} \n ✉️ Писать - @{css.from_user.username}')
             
@@ -227,7 +227,7 @@ async def sendx_(css: types.CallbackQuery):
                 async with tc.execute('SELECT * FROM iff WHERE user_id = ?', (css.from_user.id,)) as f_:
                     sends = await f_.fetchall()
             for i in sends:
-                await bot.edit_message_text(text=f'🔒 * Набор исполнителей закрыт. \n Дождитесь следующего, чтобы взять задание*',chat_id=-1001892774322, message_id=i[1], parse_mode='Markdown')
+                await bot.edit_message_text(text=f' 🔒 *Данное задание закончилось.*\n *Дождитесь нового, чтобы приступить к работе* \n \n • {link("Как начать?", "https://telegra.ph/Kak-nachat-rabotu-06-06")} \n • {link("Наши выплаты", "https://t.me/shardopl")}',chat_id=-1001892774322, message_id=i[1], parse_mode='Markdown',disable_web_page_preview=True,)
                 #await bot.delete_message(chat_id='@fludilkaotzivnichka', message_id=i[2])
             async with aiosqlite.connect('teg.db') as tc:
                 await tc.execute('UPDATE users SET cases_ = ?, price = ?, zametka = ?, usersc = ? WHERE user_id = ?',(None, None, None, None, css.from_user.id,))
